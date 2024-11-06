@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты руководителя</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style/style.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                
+            </div>
+        </div>
+    </nav>
+
+    <div class="contant">
+        <div class="menu-left">
+            <div class="container">
+                <ul class="navbar-nav" id="nav-items">
+                    <!-- Элементы навигации -->
+                </ul>
+            </div>
+
+        </div>
+        <div class="container">
+            <h1>Задачи проекта</h1>
+            <div class="filter mb-3">
+                <button type="button" class="btn btn-primary" id="openModal" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Создать задачу</button>
+                <div>
+                    <select class="form-select" id="priorityFilter">
+                        <option value="">Все приоритеты</option>
+                        <option value="Низкий">Низкий</option>
+                        <option value="Средний">Средний</option>
+                        <option value="Высокий">Высокий</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="tasks-container" class="row g-4"></div>
+
+            <!-- Pagination container -->
+            <div class="pagination-container"></div>
+
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Создать задачу</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="created_task">
+                        @csrf
+                        <input type="hidden" value="id_project" name="id_project ">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Название</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Описание</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">Приоритет</label>
+                            <select class="form-select" id="priority" name="priority" required>
+                                <option value="">Выберите приоритет</option>
+                                <option value="Низкий">Низкий</option>
+                                <option value="Средний">Средний</option>
+                                <option value="Высокий">Высокий</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date_start" class="form-label">Дата начала</label>
+                            <input type="date" class="form-control" id="date_start" name="date_start" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date_end" class="form-label">Дата окончания</label>
+                            <input type="date" class="form-control" id="date_end" name="date_end" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="manager" class="form-label">Исполнитель</label>
+                            <select id="executorsList" class="form-select" id="manager" name="id_manager" required>
+                                <option value="">Выберите исполнителя</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Создать задачу</button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../script/header.js"></script>
+    <script src="../script/editorInfoTaskProject.js"></script>
+    <script>
+        var strGET = window.location.search.replace('?', '');
+        var projectId = strGET.slice(3);
+
+        $(document).ready(function () {
+            $('#openModal').click(function () {
+                $.ajax({
+                    url: `http://manage-back/taskAdd/${projectId}`,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                        var executorsHTML = '';
+                        $.each(response.editors, function (index, editor) {
+                            executorsHTML += `<option value="${editor.id}" > ${editor.name}</option>`;
+                        });
+                        $('#executorsList').html(executorsHTML);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Ошибка:", error);
+                    }
+                });
+            });
+        });
+        $(document).ready(() => {
+            $("#created_task").submit((event) => {
+                event.preventDefault(); // Предотвращаем стандартную отправку формы
+                var formData = $("#created_task").serialize();
+
+                $.ajax({
+                    url: `http://manage-back/tasks/${projectId}`,
+                    method: "POST",
+                    data: formData,
+                    dataType: "json",
+                    success: (response) => {
+                        console.log("Задача успешно создана:", response);
+                        location.href = `InfoTaskProject.html?id=${projectId}`;
+                    },
+                    error: (xhr) => {
+                        console.error("Ошибка при создании задачи:", xhr.responseJSON);
+                    }
+                });
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

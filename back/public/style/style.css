@@ -1,0 +1,113 @@
+.contant {
+    width: 100%;
+    display: flex;
+}
+
+.menu-left {
+    background-color: rgba(207, 206, 205, 0.603);
+    min-width: 20%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    align-items: baseline;
+}
+
+/* таблица в админке */
+
+.table-container {
+    width: 60%;
+    margin: auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Убираем двойные границы */
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    /* Выравнивание текста по левому краю */
+    border-bottom: 1px solid #ddd;
+    /* Нижняя граница ячеек */
+}
+
+th {
+    background-color: #f2f2f2;
+    /* Цвет фона заголовков */
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+    /* Цвет строки при наведении */
+}
+
+
+.add-user {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.all-project {
+    display: flex;
+}
+
+.card-header {
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+}
+.addTask{
+    display: flex;
+    justify-content: space-between;
+}
+.img-add{
+    width: 50px;
+    height: 50px;
+}
+.pagination {
+    justify-content: center; /* Центрирование пагинации */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a, .pagination span {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+}
+
+.pagination .current {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .disabled {
+    color: #ccc;
+}
+.img-comment{
+    width: 50px;
+    height: 50px;
+}
+.commentary{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

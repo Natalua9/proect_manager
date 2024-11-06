@@ -1,0 +1,161 @@
+.contant {
+    width: 100%;
+    display: flex;
+}
+.nav-link {
+    color: #ffffff;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px black;
+}
+/* #navbarNav{
+    display: flex;
+    justify-content: center;
+} */
+.nav-link:hover {
+    color: #878787;
+    font-size: 20px;
+}
+.menu-left {
+    background-color: #6c6b6bb8;
+    /* min-width: 20%; */
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    align-items: baseline;
+    background-color: #6c6b6bb8;
+}
+
+/* таблица в админке */
+
+.table-container {
+    width: 60%;
+    margin: auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Убираем двойные границы */
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    /* Выравнивание текста по левому краю */
+    border-bottom: 1px solid #ddd;
+    /* Нижняя граница ячеек */
+}
+
+th {
+    background-color: #f2f2f2;
+    /* Цвет фона заголовков */
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+    /* Цвет строки при наведении */
+}
+
+
+.add-user {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.all-project {
+    display: flex;
+}
+
+.card-header {
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addTask {
+    display: flex;
+    justify-content: space-between;
+}
+
+.img-add {
+    width: 50px;
+    height: 50px;
+}
+
+.pagination {
+    justify-content: center;
+    /* Центрирование пагинации */
+    margin-top: 20px;
+    /* Отступ сверху */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a,
+.pagination span {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+}
+
+.pagination .current {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .disabled {
+    color: #ccc;
+}
+
+.img-comment {
+    width: 50px;
+    height: 50px;
+}
+
+.commentary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.filter {
+    display: flex;
+    gap: 10%;
+}
+
+.project-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 15px;
+}
+/* Стиль для заголовка столбца с сортировкой */
+#daysLeftHeader {
+    cursor: pointer;
+    font-weight: bold;
+    color: #007bff; /* Яркий цвет текста */
+    transition: color 0.3s, transform 0.3s;
+}
+
+/* При наведении на заголовок */
+#daysLeftHeader:hover {
+    color: #0056b3; /* Тёмный оттенок синего */
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+
